@@ -1,0 +1,337 @@
+crypto/proposal/proposal_keywords_static.lo: \
+ crypto/proposal/proposal_keywords_static.c /usr/include/stdc-predef.h \
+ /home/kiwitech/kiwi/VPNstrongswan/strongswan/config.h \
+ /usr/include/string.h /usr/include/features.h \
+ /usr/include/i386-linux-gnu/sys/cdefs.h \
+ /usr/include/i386-linux-gnu/bits/wordsize.h \
+ /usr/include/i386-linux-gnu/gnu/stubs.h \
+ /usr/include/i386-linux-gnu/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-linux-gnu/4.8/include/stddef.h /usr/include/xlocale.h \
+ /usr/include/i386-linux-gnu/bits/string.h \
+ /usr/include/i386-linux-gnu/bits/string2.h /usr/include/endian.h \
+ /usr/include/i386-linux-gnu/bits/endian.h \
+ /usr/include/i386-linux-gnu/bits/byteswap.h \
+ /usr/include/i386-linux-gnu/bits/types.h \
+ /usr/include/i386-linux-gnu/bits/typesizes.h \
+ /usr/include/i386-linux-gnu/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/i386-linux-gnu/bits/string3.h crypto/transform.h \
+ utils/utils.h /usr/include/i386-linux-gnu/sys/types.h \
+ /usr/include/time.h /usr/include/i386-linux-gnu/sys/select.h \
+ /usr/include/i386-linux-gnu/bits/select.h \
+ /usr/include/i386-linux-gnu/bits/sigset.h \
+ /usr/include/i386-linux-gnu/bits/time.h \
+ /usr/include/i386-linux-gnu/bits/select2.h \
+ /usr/include/i386-linux-gnu/sys/sysmacros.h \
+ /usr/include/i386-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/i386-linux-gnu/bits/waitflags.h \
+ /usr/include/i386-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/i386-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/i386-linux-gnu/bits/stdlib-float.h \
+ /usr/include/i386-linux-gnu/bits/stdlib.h \
+ /usr/include/i386-linux-gnu/sys/time.h /usr/include/arpa/inet.h \
+ /usr/include/netinet/in.h \
+ /usr/lib/gcc/i686-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
+ /usr/include/i386-linux-gnu/bits/wchar.h \
+ /usr/include/i386-linux-gnu/sys/socket.h \
+ /usr/include/i386-linux-gnu/sys/uio.h \
+ /usr/include/i386-linux-gnu/bits/uio.h \
+ /usr/include/i386-linux-gnu/bits/socket.h \
+ /usr/include/i386-linux-gnu/bits/socket_type.h \
+ /usr/include/i386-linux-gnu/bits/sockaddr.h \
+ /usr/include/i386-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/i386-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/i386-linux-gnu/bits/socket2.h \
+ /usr/include/i386-linux-gnu/bits/in.h /usr/include/netdb.h \
+ /usr/include/rpc/netdb.h /usr/include/i386-linux-gnu/bits/netdb.h \
+ /usr/include/sched.h /usr/include/i386-linux-gnu/bits/sched.h \
+ /usr/lib/gcc/i686-linux-gnu/4.8/include/stdbool.h utils/enum.h \
+ utils/printf_hook/printf_hook.h utils/utils/strerror.h \
+ crypto/crypters/crypter.h library.h utils/printf_hook/printf_hook.h \
+ utils/utils.h networking/host_resolver.h networking/host.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/lib/gcc/i686-linux-gnu/4.8/include/stdarg.h \
+ /usr/include/i386-linux-gnu/bits/stdio_lim.h \
+ /usr/include/i386-linux-gnu/bits/sys_errlist.h \
+ /usr/include/i386-linux-gnu/bits/stdio.h \
+ /usr/include/i386-linux-gnu/bits/stdio2.h utils/chunk.h utils/utils.h \
+ networking/streams/stream_manager.h networking/streams/stream_service.h \
+ processing/jobs/job.h networking/streams/stream.h processing/processor.h \
+ processing/scheduler.h processing/watcher.h crypto/crypto_factory.h \
+ collections/enumerator.h crypto/aead.h crypto/signers/signer.h \
+ crypto/iv/iv_gen.h crypto/hashers/hasher.h crypto/prfs/prf.h \
+ credentials/keys/public_key.h utils/identification.h \
+ credentials/cred_encoding.h crypto/rngs/rng.h crypto/nonce_gen.h \
+ crypto/diffie_hellman.h crypto/proposal/proposal_keywords.h \
+ fetcher/fetcher_manager.h fetcher/fetcher.h resolver/resolver_manager.h \
+ resolver/resolver.h resolver/resolver_response.h resolver/rr_set.h \
+ collections/linked_list.h resolver/rr.h database/database_factory.h \
+ database/database.h credentials/credential_factory.h \
+ credentials/builder.h credentials/credential_manager.h \
+ credentials/auth_cfg.h credentials/credential_set.h \
+ credentials/keys/shared_key.h credentials/certificates/certificate.h \
+ credentials/keys/private_key.h credentials/cert_validator.h \
+ credentials/cred_encoding.h utils/chunk.h utils/capabilities.h \
+ utils/integrity_checker.h utils/leak_detective.h utils/backtrace.h \
+ plugins/plugin_loader.h utils/debug.h settings/settings.h
+
+/usr/include/stdc-predef.h:
+
+/home/kiwitech/kiwi/VPNstrongswan/strongswan/config.h:
+
+/usr/include/string.h:
+
+/usr/include/features.h:
+
+/usr/include/i386-linux-gnu/sys/cdefs.h:
+
+/usr/include/i386-linux-gnu/bits/wordsize.h:
+
+/usr/include/i386-linux-gnu/gnu/stubs.h:
+
+/usr/include/i386-linux-gnu/gnu/stubs-32.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.8/include/stddef.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/i386-linux-gnu/bits/string.h:
+
+/usr/include/i386-linux-gnu/bits/string2.h:
+
+/usr/include/endian.h:
+
+/usr/include/i386-linux-gnu/bits/endian.h:
+
+/usr/include/i386-linux-gnu/bits/byteswap.h:
+
+/usr/include/i386-linux-gnu/bits/types.h:
+
+/usr/include/i386-linux-gnu/bits/typesizes.h:
+
+/usr/include/i386-linux-gnu/bits/byteswap-16.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/i386-linux-gnu/bits/string3.h:
+
+crypto/transform.h:
+
+utils/utils.h:
+
+/usr/include/i386-linux-gnu/sys/types.h:
+
+/usr/include/time.h:
+
+/usr/include/i386-linux-gnu/sys/select.h:
+
+/usr/include/i386-linux-gnu/bits/select.h:
+
+/usr/include/i386-linux-gnu/bits/sigset.h:
+
+/usr/include/i386-linux-gnu/bits/time.h:
+
+/usr/include/i386-linux-gnu/bits/select2.h:
+
+/usr/include/i386-linux-gnu/sys/sysmacros.h:
+
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/i386-linux-gnu/bits/waitflags.h:
+
+/usr/include/i386-linux-gnu/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/i386-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/i386-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/i386-linux-gnu/bits/stdlib.h:
+
+/usr/include/i386-linux-gnu/sys/time.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/netinet/in.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.8/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/i386-linux-gnu/bits/wchar.h:
+
+/usr/include/i386-linux-gnu/sys/socket.h:
+
+/usr/include/i386-linux-gnu/sys/uio.h:
+
+/usr/include/i386-linux-gnu/bits/uio.h:
+
+/usr/include/i386-linux-gnu/bits/socket.h:
+
+/usr/include/i386-linux-gnu/bits/socket_type.h:
+
+/usr/include/i386-linux-gnu/bits/sockaddr.h:
+
+/usr/include/i386-linux-gnu/asm/socket.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/i386-linux-gnu/asm/sockios.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/i386-linux-gnu/bits/socket2.h:
+
+/usr/include/i386-linux-gnu/bits/in.h:
+
+/usr/include/netdb.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/i386-linux-gnu/bits/netdb.h:
+
+/usr/include/sched.h:
+
+/usr/include/i386-linux-gnu/bits/sched.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.8/include/stdbool.h:
+
+utils/enum.h:
+
+utils/printf_hook/printf_hook.h:
+
+utils/utils/strerror.h:
+
+crypto/crypters/crypter.h:
+
+library.h:
+
+utils/printf_hook/printf_hook.h:
+
+utils/utils.h:
+
+networking/host_resolver.h:
+
+networking/host.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.8/include/stdarg.h:
+
+/usr/include/i386-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/i386-linux-gnu/bits/sys_errlist.h:
+
+/usr/include/i386-linux-gnu/bits/stdio.h:
+
+/usr/include/i386-linux-gnu/bits/stdio2.h:
+
+utils/chunk.h:
+
+utils/utils.h:
+
+networking/streams/stream_manager.h:
+
+networking/streams/stream_service.h:
+
+processing/jobs/job.h:
+
+networking/streams/stream.h:
+
+processing/processor.h:
+
+processing/scheduler.h:
+
+processing/watcher.h:
+
+crypto/crypto_factory.h:
+
+collections/enumerator.h:
+
+crypto/aead.h:
+
+crypto/signers/signer.h:
+
+crypto/iv/iv_gen.h:
+
+crypto/hashers/hasher.h:
+
+crypto/prfs/prf.h:
+
+credentials/keys/public_key.h:
+
+utils/identification.h:
+
+credentials/cred_encoding.h:
+
+crypto/rngs/rng.h:
+
+crypto/nonce_gen.h:
+
+crypto/diffie_hellman.h:
+
+crypto/proposal/proposal_keywords.h:
+
+fetcher/fetcher_manager.h:
+
+fetcher/fetcher.h:
+
+resolver/resolver_manager.h:
+
+resolver/resolver.h:
+
+resolver/resolver_response.h:
+
+resolver/rr_set.h:
+
+collections/linked_list.h:
+
+resolver/rr.h:
+
+database/database_factory.h:
+
+database/database.h:
+
+credentials/credential_factory.h:
+
+credentials/builder.h:
+
+credentials/credential_manager.h:
+
+credentials/auth_cfg.h:
+
+credentials/credential_set.h:
+
+credentials/keys/shared_key.h:
+
+credentials/certificates/certificate.h:
+
+credentials/keys/private_key.h:
+
+credentials/cert_validator.h:
+
+credentials/cred_encoding.h:
+
+utils/chunk.h:
+
+utils/capabilities.h:
+
+utils/integrity_checker.h:
+
+utils/leak_detective.h:
+
+utils/backtrace.h:
+
+plugins/plugin_loader.h:
+
+utils/debug.h:
+
+settings/settings.h:

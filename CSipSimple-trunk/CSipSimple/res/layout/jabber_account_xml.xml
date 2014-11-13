@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical" >
+  
+    <TextView 
+     android:id="@+id/account_name"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/account_name" 
+     android:textSize="20sp"
+     android:textStyle="bold"
+     android:layout_marginTop="20dp"  
+     />
+    
+    <EditText
+     android:id="@+id/edit_account_name"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:hint="@string/account_name"
+     android:layout_below="@+id/account_name"
+     />
+    
+    <TextView 
+     android:id="@+id/user_name"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/user_name_xmpp" 
+     android:textSize="20sp"
+     android:textStyle="bold"
+     android:layout_marginTop="20dp"   
+     android:layout_below="@+id/edit_account_name"
+     />
+    
+    <EditText
+     android:id="@+id/edit_user_name"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:hint="@string/user_name_xmpp"
+     android:layout_below="@+id/user_name"
+     />
+    
+    <TextView 
+     android:id="@+id/password"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/password_xmpp" 
+     android:textSize="20sp"
+     android:textStyle="bold"
+     android:layout_marginTop="20dp"  
+     android:layout_below="@+id/edit_user_name" 
+     />
+    
+    <EditText
+     android:id="@+id/edit_password"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:hint="@string/password_xmpp"
+     android:layout_below="@+id/password" 
+     android:inputType="textPassword"
+     />
+    
+    <TextView 
+     android:id="@+id/domain"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/domain_xmpp"  
+     android:textSize="20sp"
+     android:textStyle="bold"
+     android:layout_marginTop="20dp" 
+     android:layout_below="@+id/edit_password"  
+     />
+    
+    <EditText
+     android:id="@+id/edit_domain"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:hint="@string/domain_xmpp"
+     android:layout_below="@+id/domain"
+     />
+    
+    <Button 
+     android:id="@+id/bttn_connect"  
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/connect" 
+     android:layout_below="@+id/edit_domain"
+     android:layout_marginTop="40dp"
+     android:layout_centerHorizontal="true"
+     
+     />
+    
+
+</RelativeLayout>

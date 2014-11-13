@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:id="@+id/recepient_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="70dp"
+            android:text="Chat With"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/toET"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Add Recipient"
+            android:minWidth="250dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <RelativeLayout
+     android:id="@+id/rel_list"
+     android:layout_below="@+id/recepient_layout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" 
+     android:layout_above="@+id/emojicons_frame">
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/v4_oncam_conversation_input_layout"
+        android:divider="@null"
+        android:fastScrollEnabled="true"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:smoothScrollbar="true"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+    <LinearLayout
+        android:id="@+id/v4_oncam_conversation_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/underline_textchat"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginBottom="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_5dp"
+            android:layout_marginRight="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_1dp"
+            android:background="@color/darkgray_70" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_extra_small" >
+
+            <ImageView
+                android:id="@+id/v4_oncam_conversation_input_smiley"
+                android:layout_width="@dimen/image_normal"
+                android:layout_height="@dimen/image_normal"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_add"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/v4_oncam_conversation_input_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/v4_oncam_conversation_input_record_rel"
+                android:layout_toRightOf="@+id/v4_oncam_conversation_input_smiley"
+                android:enabled="true"
+                android:hint="Type Message"
+                android:imeOptions="actionSend"
+                android:singleLine="true"
+                android:textColorHint="@color/graycolor"
+                android:textSize="@dimen/text_14sp" />
+           <RelativeLayout
+              android:id="@+id/v4_oncam_conversation_input_record_rel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"  
+              android:layout_alignBaseline="@id/v4_oncam_conversation_input_smiley"
+              android:layout_alignParentRight="true"
+              android:layout_margin="@dimen/dimen_4dp" 
+            >
+            <ImageView
+                android:id="@+id/v4_oncam_conversation_input_send"
+                android:layout_width="@dimen/image_normal"
+                android:layout_height="@dimen/image_normal"
+                android:src="@drawable/ic_send" 
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/v4_oncam_conversation_input_recording"
+                android:layout_width="@dimen/image_normal"
+                android:layout_height="@dimen/image_normal"
+                android:layout_margin="@dimen/dimen_4dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_voice" />
+            </RelativeLayout> 
+            
+           <RelativeLayout 
+            android:id="@+id/relative_audio_recording"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/v4_oncam_conversation_input_smiley"
+            android:layout_toLeftOf="@+id/v4_oncam_conversation_input_record_rel"   
+            android:background="@android:color/white"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:id="@+id/v4_oncam_conversation_input_record_anim"
+                android:layout_width="@dimen/image_normal"
+                android:layout_height="@dimen/image_normal"
+                android:layout_margin="@dimen/dimen_4dp"
+                android:background="@drawable/ic_voice"
+                android:visibility="visible" />  
+              <Chronometer
+				android:id="@+id/chronometer"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/v4_oncam_conversation_input_record_anim" 
+                android:layout_centerVertical="true"
+				 /> 
+				 
+              <TextView 
+               android:id="@+id/recording_cancel"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@android:color/black" 
+               android:text="cancelrecording"  
+               android:layout_toRightOf="@+id/chronometer"
+               android:layout_marginLeft="@dimen/margin_normal" 
+               android:layout_centerVertical="true" 
+               
+               />
+           </RelativeLayout>
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    </RelativeLayout>
+    <FrameLayout
+             android:id="@+id/emojicons_frame"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"  
+            android:layout_alignParentBottom="true" 
+            android:visibility="gone"
+             >
+           <!--  <fragment
+            android:id="@+id/emojicons"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            class="com.rockerhieu.emojicon.EmojiconsFragment"/> -->
+			</FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,5 @@
+obj/local/mips/objs/pj_codec2_codec/__/generated/codebookjnd.o: \
+ jni/codec2/android_toolchain/../generated/codebookjnd.c \
+ jni/codec2/android_toolchain/../sources/defines.h
+
+jni/codec2/android_toolchain/../sources/defines.h:

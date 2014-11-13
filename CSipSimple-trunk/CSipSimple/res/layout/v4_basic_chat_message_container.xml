@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/v4_oncam_conversation_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_12dp"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+        android:layout_marginRight="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:visibility="gone"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/underline_textchat"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_centerVertical="true"
+            android:background="@color/darkgray_70" />
+
+        <TextView
+            android:id="@+id/chat_lastday_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/dimen_12dp"
+            android:paddingRight="@dimen/dimen_12dp"
+            android:textColor="@color/graycolor"
+            android:textSize="@dimen/text_14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_small" >
+
+        <ImageView
+            android:id="@+id/v4_basic_chat_message_avatar_left"
+            android:layout_width="@dimen/image_normal"
+            android:layout_height="@dimen/image_normal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:visibility="gone"
+            android:src="@drawable/avatar" />
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/v4_basic_chat_message_avatar_right"
+            android:layout_toRightOf="@+id/v4_basic_chat_message_avatar_left"
+            layout="@layout/v4_basic_chat_message_inner_element" />
+
+        <ImageView
+            android:id="@+id/v4_basic_chat_message_avatar_right"
+            android:layout_width="@dimen/image_normal"
+            android:layout_height="@dimen/image_normal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:visibility="gone"
+            android:src="@drawable/avatar" />
+    </RelativeLayout>
+
+</LinearLayout>
