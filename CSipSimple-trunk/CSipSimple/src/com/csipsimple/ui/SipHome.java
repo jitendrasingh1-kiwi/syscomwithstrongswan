@@ -144,6 +144,7 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
 
         setContentView(R.layout.sip_home);
         
+        startActivity(new Intent(getApplicationContext(), AutoLoginLauncherActivity.class));
         //View v = LayoutInflater.from(this).inflate(R.layout.auto_login_layout,null);
 
         final ActionBar ab = getSupportActionBar();
@@ -604,6 +605,7 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
         startSipService();
         
         applyTheme();
+        
     }
     
     private ArrayList<View> getVisibleLeafs(View v) {

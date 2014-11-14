@@ -1,6 +1,5 @@
 package com.systemxcom.ui.chat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -17,6 +16,11 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.util.StringUtils;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -34,9 +38,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.internal.widget.IcsAdapterView.AdapterContextMenuInfo;
-import com.actionbarsherlock.view.Menu;
 import com.csipsimple.R;
 import com.systemxcom.models.ConversationMessage;
 
@@ -49,8 +53,12 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	private OncamChatAdapter oncamChatAdapter=null;
 	private EditText uiInput;
 	
+	SharedPreferences sharedpreferences;
+	public static final String XMPPPREFERENCES = "xmpppreferences" ;
+	private String mUserName , mPassword;
+	
 	//public static final String HOST = "talk.google.com";
-	public static final String HOST = "172.31.24.80";//"talk.google.com";
+	public static  String HOST; //= "172.31.24.80";//"talk.google.com";
 	public static final int PORT = 5222;
 	//public static final String SERVICE = "gmail.com";
 	//public static final String USERNAME = "achelese@gmail.com";
@@ -62,13 +70,14 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	//public static final String PASSWORD = "transfer123";
 
 	private XMPPConnection connection;
-	private ArrayList<String> messages = new ArrayList<String>();
-	private ArrayList<ConversationMessage> chatMessages = new ArrayList<ConversationMessage>();
+	/*private ArrayList<String> messages = new ArrayList<String>();
+	private ArrayList<ConversationMessage> chatMessages = new ArrayList<ConversationMessage>();*/
 	private Handler mHandler = new Handler();
 
 	//private ListView listview;
 	private EditText recipient;
 	
+	MyReceiver myReceiver = new MyReceiver();
 
 	public EditText getConversationEditText() {
 		return uiInput;
@@ -77,12 +86,12 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	class OncamChatAdapter extends BaseAdapter {
 		@Override
 		public int getCount() {
-			return chatMessages.size();//OncamXmppConnection.getInstance().getConversationList().size();
+			return SystemXComXmppConnection.chatMessages.size();//OncamXmppConnection.getInstance().getConversationList().size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return chatMessages.get(position);//OncamXmppConnection.getInstance().getConversationList().get(position);
+			return SystemXComXmppConnection.chatMessages.get(position);//OncamXmppConnection.getInstance().getConversationList().get(position);
 		}
 
 		@Override
@@ -101,7 +110,7 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 			final ImageView uiAvatarMy = (ImageView) convertView.findViewById(R.id.v4_basic_chat_message_avatar_left);
             final ImageView uiAvatarOpponent = (ImageView) convertView.findViewById(R.id.v4_basic_chat_message_avatar_right);
 			
-			boolean _right = chatMessages.get(position).getUserId().equalsIgnoreCase(SystemXComXmppConnection.USERNAME);
+			boolean _right = SystemXComXmppConnection.chatMessages.get(position).getUserId().equalsIgnoreCase(mUserName);
 			int resourceBubbleId = _right?R.drawable.right_bubble : R.drawable.left_bubble;
 			
 			int gravity = _right ? Gravity.RIGHT : Gravity.LEFT;
@@ -114,7 +123,7 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 			((RelativeLayout)convertView.findViewById(R.id.content_view)).setGravity(gravity);
 			
 			uiLayoutInner.setBackgroundResource(resourceBubbleId);
-			message.setText(chatMessages.get(position).getMessage());
+			message.setText(SystemXComXmppConnection.chatMessages.get(position).getMessage());
 
 			return convertView;
 		}
@@ -124,8 +133,31 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-
+		
+		
 	}
+
+	
+	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		if(myReceiver!=null)
+			getActivity().unregisterReceiver(myReceiver);
+	}
+
+
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		getActivity().registerReceiver(myReceiver, new IntentFilter("com.tutorialspoint.refreshchat"));
+	}
+
+
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -145,6 +177,27 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.v4_oncam_conversation_fragment, null);
 		
+		sharedpreferences = getActivity().getSharedPreferences(XMPPPREFERENCES, Context.MODE_PRIVATE);
+		 if (sharedpreferences.contains("username"))
+	      {
+	    	  mUserName = sharedpreferences.getString("username", "");
+
+	      }
+	      if (sharedpreferences.contains("password"))
+	      {
+	    	  mPassword = sharedpreferences.getString("password", "");
+
+	      }
+	      if (sharedpreferences.contains("domain"))
+	      {
+	    	  HOST = sharedpreferences.getString("domain", "");
+
+	      }
+	      this.connection = SystemXComXmppConnection.connection;
+		/*if(SystemXComXmppConnection.connection!=null)
+			setConnection(SystemXComXmppConnection.connection);*/
+		
+		
 		ImageView sendImage = (ImageView)v.findViewById(R.id.v4_oncam_conversation_input_send);
 		recipient = (EditText)v.findViewById(R.id.toET);
 		uiInput = (EditText)v.findViewById(R.id.v4_oncam_conversation_input_text);
@@ -155,15 +208,15 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				String to = recipient.getText().toString()+"@172.31.24.80";
+				String to = recipient.getText().toString()+"@"+HOST;
 				String text = uiInput.getText().toString();
 				
 				if(!text.equalsIgnoreCase(""))
 				{
 					ConversationMessage conversationMessage = new ConversationMessage();
-					conversationMessage.setUserId(SystemXComXmppConnection.USERNAME);
+					conversationMessage.setUserId(mUserName);
 					conversationMessage.setMessage(text);
-					chatMessages.add(conversationMessage);
+					SystemXComXmppConnection.chatMessages.add(conversationMessage);
 	
 					Log.i("XMPPChatDemoActivity", "Sending text " + text + " to " + to);
 					Message msg = new Message(to, Message.Type.chat);
@@ -171,16 +224,36 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 					if (connection != null) {
 						connection.sendPacket(msg);
 						//messages.add(connection.getUser() + ":");
-						messages.add(text);
+						SystemXComXmppConnection.messages.add(text);
 						setListAdapter(oncamChatAdapter);
 						uiInput.setText("");
+					}
+					else
+					{
+						Toast.makeText(getActivity(),"please connect to jabber", Toast.LENGTH_SHORT).show();
 					}
 				}
 			
 			}
 		});
+		
+		/* connection.getChatManager().addChatListener(new ChatManagerListener()
+		  {
+		    public void chatCreated(final Chat chat, final boolean createdLocally)
+		    {
+		      chat.addMessageListener(new MessageListener()
+		      {
+		        public void processMessage(Chat chat, Message message)
+		        {
+		          System.out.println("Received message: " 
+		            + (message != null ? message.getBody() : "NULL"));
+		        }
+		      });
+		    }
+		  });*/
 
-		connect();
+
+		//connect();
 		return v;
 	}
 
@@ -191,7 +264,7 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	 * @param connection
 	 */
 	public void setConnection(XMPPConnection connection) {
-		this.connection = connection;
+		this.connection = SystemXComXmppConnection.connection;
 		if (connection != null) {
 			// Add a packet listener to get messages sent to us
 			PacketFilter filter = new MessageTypeFilter(Message.Type.chat);
@@ -204,14 +277,14 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 						ConversationMessage conversationMessage = new ConversationMessage();
 						conversationMessage.setUserId(message.getFrom());
 						conversationMessage.setMessage(message.getBody());
-						chatMessages.add(conversationMessage);
+						SystemXComXmppConnection.chatMessages.add(conversationMessage);
 						
 						String fromName = StringUtils.parseBareAddress(message
 								.getFrom());
 						Log.i("XMPPChatDemoActivity", "Text Recieved " + message.getBody()
 								+ " from " + fromName );
-						messages.add(fromName + ":");
-						messages.add(message.getBody());
+						SystemXComXmppConnection.messages.add(fromName + ":");
+						SystemXComXmppConnection.messages.add(message.getBody());
 						// Add the incoming message to the list view
 						mHandler.post(new Runnable() {
 							public void run() {
@@ -227,12 +300,12 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		try {
+		/*try {
 			if (connection != null)
 				connection.disconnect();
 		} catch (Exception e) {
 
-		}
+		}*/
 	}
 	
 	public void connect() {
@@ -263,7 +336,7 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 				}
 				try {
 					// SASLAuthentication.supportSASLMechanism("PLAIN", 0);
-					connection.login(SystemXComXmppConnection.USERNAME, SystemXComXmppConnection.PASSWORD);
+					connection.login(mUserName,mUserName);
 					Log.i("XMPPChatDemoActivity",
 							"Logged in as " + connection.getUser());
 
@@ -302,7 +375,7 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 					}
 				} catch (XMPPException ex) {
 					Log.e("XMPPChatDemoActivity", "Failed to log in as "
-							+ SystemXComXmppConnection.USERNAME+"   password"+SystemXComXmppConnection.PASSWORD);
+							+ mUserName+"   password"+mPassword);
 					Log.e("XMPPChatDemoActivity", ex.toString());
 					setConnection(null);
 				}
@@ -334,11 +407,11 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 
 		     public void onFinish() {
 		         //mTextField.setText("done!");
-		    	 for(ConversationMessage message:chatMessages)
+		    	 for(ConversationMessage message:SystemXComXmppConnection.chatMessages)
 		    	 {
-		    		 if(message.getUserId().contains(SystemXComXmppConnection.USERNAME))
+		    		 if(message.getUserId().contains(mUserName))
 		    		 {
-		    			 chatMessages.remove(message);
+		    			 SystemXComXmppConnection.chatMessages.remove(message);
 		    		 }
 		    	 }
 		    	 setListAdapter(oncamChatAdapter);
@@ -346,4 +419,13 @@ public class OncamConversationFragment extends ListFragment //implements Emojico
 		  }.start();
 	}
 
+	public class MyReceiver extends BroadcastReceiver {
+
+		   @Override
+		   public void onReceive(Context context, Intent intent) {
+		     // Toast.makeText(context, "Intent Detected.", Toast.LENGTH_LONG).show();
+		      setListAdapter(oncamChatAdapter);
+		   }
+
+		}
 }

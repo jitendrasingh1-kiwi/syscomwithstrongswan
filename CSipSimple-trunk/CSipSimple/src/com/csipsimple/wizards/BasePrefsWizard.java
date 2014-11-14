@@ -94,8 +94,8 @@ public class BasePrefsWizard extends GenericPrefs {
 			public void onClick(View v) {
 				saveAndFinish();
 				Toast.makeText(getApplicationContext(), "saved"+account.default_uri_scheme+" "+account.id+"  "+account.wizard, Toast.LENGTH_LONG).show();
-				SystemXComXmppConnection.USERNAME = account.display_name;
-				SystemXComXmppConnection.PASSWORD = account.data;
+				//SystemXComXmppConnection.USERNAME = account.display_name;
+				//SystemXComXmppConnection.PASSWORD = account.data;
 			}
 		});
         wizard.fillLayout(account);

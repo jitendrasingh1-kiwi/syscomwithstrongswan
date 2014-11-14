@@ -1,5 +1,6 @@
 package com.systemxcom.ui.chat;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -9,6 +10,8 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
+import com.systemxcom.models.ConversationMessage;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,15 +19,18 @@ import android.util.Log;
 
 public class SystemXComXmppConnection 
 {
-	public static String USERNAME; //="jitendra";
-	public static  String PASSWORD; //= "transfer123";
+	//public static String USERNAME; //="jitendra";
+	//public static  String PASSWORD; //= "transfer123";
 	public static XMPPConnection connection;
-	 ProgressDialog dialog;
+	 //ProgressDialog dialog;
 	
 	public static final String HOST = "172.31.24.80";//"talk.google.com";
 	public static final int PORT = 5222;
 	
-	 private static SystemXComXmppConnection instance = null;
+	public static ArrayList<String> messages = new ArrayList<String>();
+	public static ArrayList<ConversationMessage> chatMessages = new ArrayList<ConversationMessage>();
+	
+	/* private static SystemXComXmppConnection instance = null;
 	   protected SystemXComXmppConnection() {
 	      
 	   }
@@ -48,16 +54,16 @@ public class SystemXComXmppConnection
 						"Connecting...", "Please wait...", false);
 			}
 		});
-			/*final ProgressDialog dialog = ProgressDialog.show(context,
-					"Connecting...", "Please wait...", false);*/
+			final ProgressDialog dialog = ProgressDialog.show(context,
+					"Connecting...", "Please wait...", false);
 
 			Thread t = new Thread(new Runnable() {
 
 				@Override
 				public void run() {
 					// Create a connection
-					/*ConnectionConfiguration connConfig = new ConnectionConfiguration(
-							HOST, PORT, SERVICE);*/
+					ConnectionConfiguration connConfig = new ConnectionConfiguration(
+							HOST, PORT, SERVICE);
 					ConnectionConfiguration connConfig = new ConnectionConfiguration(
 							HOST, PORT);
 				    connection = new XMPPConnection(connConfig);
@@ -137,5 +143,5 @@ public class SystemXComXmppConnection
 					dialog.dismiss();
 				}
 			});
-		}
+		}*/
 }
