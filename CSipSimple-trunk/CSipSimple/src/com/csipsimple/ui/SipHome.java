@@ -57,6 +57,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.systemxcom.ui.chat.ChatDestructionActivity;
 import com.systemxcom.ui.chat.JabberAccountActivity;
+import com.systemxcom.ui.chat.JabberAddAccountActivity;
 import com.systemxcom.ui.chat.OncamConversationFragment;
 import com.csipsimple.R;
 import com.csipsimple.api.SipConfigManager;
@@ -820,7 +821,8 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case XMPP_MESSAGING_MENU:
-            startActivity(new Intent(this, JabberAccountActivity.class));
+            //startActivity(new Intent(this, JabberAccountActivity.class));
+            startActivity(new Intent(this, JabberAddAccountActivity.class));
             return true;
         case DESTROY_MESSAGE_MENU:
             startActivity(new Intent(this, ChatDestructionActivity.class));
