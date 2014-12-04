@@ -54,6 +54,7 @@
      android:text="@string/destruction_message"
      android:layout_below="@+id/input_time_layout"
      android:layout_marginTop="20dp"
+     android:visibility="gone"
      />
      <TextView 
      android:id="@+id/text_destruction_time"
@@ -64,6 +65,7 @@
      android:text="0 day 00 hrs 00 mins 00 secs"
      android:layout_below="@+id/text_destruction_info"
      android:layout_marginTop="30dp"
+     android:visibility="gone"
      />
     <SeekBar    
          android:id="@+id/seekbar1"
@@ -72,6 +74,7 @@
          android:max="86400"
          android:progress="30" 
          android:layout_below="@+id/text_destruction_time"
+         android:visibility="gone"
          android:layout_marginTop="30dp"/>
     <TextView 
      android:id="@+id/text_destruction_info_note"
@@ -80,6 +83,7 @@
      android:text="@string/destruction_message_note"
      android:layout_below="@+id/seekbar1"
      android:layout_marginTop="30dp"
+     android:visibility="gone"
      />
     </RelativeLayout>
     

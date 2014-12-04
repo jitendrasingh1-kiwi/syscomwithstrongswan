@@ -121,6 +121,7 @@
     <string name="menu_VPN">Connect to VPN</string>
     <string name="menu_default_destruction">Default Destruction</string>
     <string name="menu_xmpp_messaging">XMPP Messaging</string>
+    <string name="lock_screen">Lock StrongSwan</string>
     
     <!--xmpp settings  -->
     <string name="account_name">Account Name</string>

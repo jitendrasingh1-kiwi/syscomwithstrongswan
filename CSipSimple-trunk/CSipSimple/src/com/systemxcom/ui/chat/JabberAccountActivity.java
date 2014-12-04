@@ -24,6 +24,8 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,6 +33,7 @@ import android.widget.EditText;
 
 import com.csipsimple.R;
 import com.systemxcom.models.ConversationMessage;
+import com.systemxcom.models.JabberAccount;
 
 /**
  * This class sets up an xmpp account and user can chat with its buddies
@@ -46,6 +49,7 @@ public class JabberAccountActivity extends Activity
 	private EditText mEditPassword;
 	private EditText mEditDomain;
 	private Button mBttnConnect;
+	private int position;
 	
 	private String mUserName , mPassword, mAccountName;
 	private String HOST;
@@ -55,38 +59,53 @@ public class JabberAccountActivity extends Activity
 	
 	private Handler mHandler = new Handler();
 	
+	private JabberAccountDatasource datasource;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jabber_account_xml);
+		
+		Bundle extra = getIntent().getExtras();
+		
+		position = extra.getInt("position");
+		
 		sharedpreferences = getSharedPreferences(XMPPPREFERENCES, Context.MODE_PRIVATE);
+		datasource = new JabberAccountDatasource(JabberAccountActivity.this);
+		datasource.open();
 		
 		mEditAccountName = (EditText)findViewById(R.id.edit_account_name);
 		mEditUserName = (EditText)findViewById(R.id.edit_user_name);
 		mEditPassword = (EditText)findViewById(R.id.edit_password);
 		mEditDomain = (EditText)findViewById(R.id.edit_domain);
 		mBttnConnect = (Button)findViewById(R.id.bttn_connect);
-		if (sharedpreferences.contains("account_name"))
-	      {
-			mEditAccountName.setText(sharedpreferences.getString("account_name", ""));
-
-	      }
-	      if (sharedpreferences.contains("username"))
-	      {
-	    	  mEditUserName.setText(sharedpreferences.getString("username", ""));
-
-	      }
-	      if (sharedpreferences.contains("password"))
-	      {
-	    	  mEditPassword.setText(sharedpreferences.getString("password", ""));
-
-	      }
-	      if (sharedpreferences.contains("domain"))
-	      {
-	    	  mEditDomain.setText(sharedpreferences.getString("domain", ""));
-
-	      }
+		if(position>=0)
+		{
+			if (sharedpreferences.contains("account_name"))
+		      {
+				//mEditAccountName.setText(sharedpreferences.getString("account_name", ""));
+				mEditAccountName.setText(JabberAddAccountActivity.mJabberAccounts.get(position).getAccountName());
+	
+		      }
+		      if (sharedpreferences.contains("username"))
+		      {
+		    	  //mEditUserName.setText(sharedpreferences.getString("username", ""));
+		    	  mEditUserName.setText(JabberAddAccountActivity.mJabberAccounts.get(position).getUserName());
+	
+		      }
+		      if (sharedpreferences.contains("password"))
+		      {
+		    	  //mEditPassword.setText(sharedpreferences.getString("password", ""));
+		    	  mEditPassword.setText(JabberAddAccountActivity.mJabberAccounts.get(position).getPassword());
+	
+		      }
+		      if (sharedpreferences.contains("domain"))
+		      {
+		    	  //mEditDomain.setText(sharedpreferences.getString("domain", ""));
+		    	  mEditDomain.setText(JabberAddAccountActivity.mJabberAccounts.get(position).getDomain());
+		      }
+		}
 	     
 		mBttnConnect.setOnClickListener(new OnClickListener() {
 			
@@ -108,13 +127,24 @@ public class JabberAccountActivity extends Activity
 					mPassword = mEditPassword.getEditableText().toString();
 					mAccountName = mEditAccountName.getEditableText().toString();
 					
+					JabberAccount jabberAccount = new JabberAccount();
+					jabberAccount.setAccountName(mAccountName);
+					jabberAccount.setDomain(HOST);
+					jabberAccount.setPassword(mPassword);
+					jabberAccount.setUserName(mUserName);
+					
+					if(position<0)
+						datasource.createAccount(jabberAccount);
+					
 					 Editor editor = sharedpreferences.edit();
 				     editor.putString("account_name", mAccountName);
 				     editor.putString("username", mUserName);
 				     editor.putString("password", mPassword);
 				     editor.putString("domain", HOST);
 				     
-				     editor.commit(); 				
+				     editor.commit(); 		
+				     if(SystemXComXmppConnection.connection!=null)
+				    	 SystemXComXmppConnection.connection.disconnect();
 					connect();
 				//}
 			}
@@ -266,4 +296,36 @@ public class JabberAccountActivity extends Activity
 	      intent.setAction("com.tutorialspoint.refreshchat");
 	      sendBroadcast(intent);
 	   }
+	   
+	   @Override
+	    protected void onResume() {
+	      datasource.open();
+	      super.onResume();
+	    }
+
+	    @Override
+	    protected void onPause() {
+	      datasource.close();
+	      super.onPause();
+	    }
+	    
+	    @Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			getMenuInflater().inflate(R.menu.menu_delete_jabber_account, menu);
+			return true;
+		}
+		
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+		        case R.id.menu_delete:
+		        	datasource.deleteAccount(JabberAddAccountActivity.mJabberAccounts.get(position));
+		        	JabberAddAccountActivity.mJabberAccounts.remove(position);
+		        	finish();
+		            return true;
+		      
+		        default:
+		            return super.onOptionsItemSelected(item);
+			}
+		}
 }

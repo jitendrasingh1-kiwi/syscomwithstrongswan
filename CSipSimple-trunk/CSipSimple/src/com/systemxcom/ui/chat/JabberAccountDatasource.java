@@ -37,8 +37,8 @@ public class JabberAccountDatasource
 	    ContentValues values = new ContentValues();
 	    values.put(MySQLiteHelper.COLUMN_ACCOUNT_NAME, jabberAccount.getAccountName());
 	    values.put(MySQLiteHelper.COLUMN_USER_NAME, jabberAccount.getUserName());
-	    values.put(MySQLiteHelper.COLUMN_PASSWORD, jabberAccount.getAccountName());
-	    values.put(MySQLiteHelper.COLUMN_DOMAIN, jabberAccount.getAccountName());
+	    values.put(MySQLiteHelper.COLUMN_PASSWORD, jabberAccount.getPassword());
+	    values.put(MySQLiteHelper.COLUMN_DOMAIN, jabberAccount.getDomain());
 	    
 	    long insertId = database.insert(MySQLiteHelper.TABLE_JABBER_ACCOUNT, null,
 	        values);
@@ -51,7 +51,7 @@ public class JabberAccountDatasource
 	    return account;
 	  }
 
-	  public void deleteComment(JabberAccount account) {
+	  public void deleteAccount(JabberAccount account) {
 	    long id = account.getId();
 	    System.out.println("Comment deleted with id: " + id);
 	    database.delete(MySQLiteHelper.TABLE_JABBER_ACCOUNT, MySQLiteHelper.COLUMN_ID

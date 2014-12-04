@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+    <RelativeLayout
+     android:id="@+id/rel_password" 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_centerInParent="true"
+     >
+    <EditText 
+    android:id="@+id/edit_password"
+    android:layout_width="200dp"    
+    android:layout_height="wrap_content"
+    android:inputType="textPassword"   
+    android:hint="Enter Lock" 
+    android:gravity="center"
+    />
+    
+    <EditText 
+    android:id="@+id/edit_confirm"
+    android:layout_width="200dp"    
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/edit_password"   
+    android:layout_marginTop="20dp" 
+    android:hint="Confirm Lock" 
+    android:gravity="center"
+    />
+    </RelativeLayout>
+    
+    <Button
+     android:id="@+id/button_set"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"   
+     android:layout_below="@+id/rel_password"  
+     android:layout_centerHorizontal="true"
+     android:layout_marginTop="20dp" 
+     android:text="SET"
+     />
+    
+
+</RelativeLayout>

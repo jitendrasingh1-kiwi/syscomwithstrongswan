@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,15 +24,22 @@ import com.systemxcom.models.JabberAccount;
 public class JabberAddAccountActivity extends Activity
 {
 	private ListView mJabberAccountList;
-	private ArrayList<JabberAccount> mJabberAccounts;
+	public static ArrayList<JabberAccount> mJabberAccounts;
 	private CustomAdapter mCustomAdapter;
+	private JabberAccountDatasource datasource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jabberaccountlist);
-		mJabberAccounts = new ArrayList<JabberAccount>();
+		
+		datasource = new JabberAccountDatasource(JabberAddAccountActivity.this);
+		datasource.open();
+		
+		if(mJabberAccounts!=null)
+			mJabberAccounts.clear();
+		mJabberAccounts = datasource.getAllAccounts();
 		
 		mJabberAccountList = (ListView)findViewById(R.id.account_list);
 		mCustomAdapter = new CustomAdapter();
@@ -49,6 +57,10 @@ public class JabberAddAccountActivity extends Activity
 		switch (item.getItemId()) {
 	        case R.id.menu_add:
 	            // Red item was selected
+	        	///Toast.makeText(getApplicationContext(),"add an account", Toast.LENGTH_LONG).show();
+	        	Intent intent = new Intent(JabberAddAccountActivity.this, JabberAccountActivity.class);
+	        	intent.putExtra("position",-1);
+	        	startActivity(intent);
 	            return true;
 	      
 	        default:
@@ -56,8 +68,8 @@ public class JabberAddAccountActivity extends Activity
 		}
 	}
 	
-	/********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
-	public class CustomAdapter extends BaseAdapter   implements OnClickListener {
+	
+	public class CustomAdapter extends BaseAdapter {
 	          
 	    
 	         private  LayoutInflater inflater=null;
@@ -82,7 +94,7 @@ public class JabberAddAccountActivity extends Activity
 	             return position;
 	         }
 	         /****** Depends upon data size called for each row , Create each ListView row *****/
-	         public View getView(int position, View convertView, ViewGroup parent) {
+	         public View getView(final int position, View convertView, ViewGroup parent) {
 	              
 	             View vi = convertView;
 	             ViewHolder holder;
@@ -105,50 +117,24 @@ public class JabberAddAccountActivity extends Activity
 	             }
 	             else
 	             {
-	                /* *//***** Get each Model object from Arraylist ********//*
-	                 tempValues=null;
-	                 tempValues = ( ListModel ) data.get( position );
-	                  
-	                 *//************  Set Model values in Holder elements ***********//*
-	 
-	                  holder.text.setText( tempValues.getCompanyName() );
-	                  holder.text1.setText( tempValues.getUrl() );
-	                   holder.image.setImageResource(
-	                               res.getIdentifier(
-	                               "com.androidexample.customlistview:drawable/"+tempValues.getImage()
-	                               ,null,null));*/
-	                   
-	                  /******** Set Item Click Listner for LayoutInflater for each row *******/
-	 
-	                //  vi.setOnClickListener(new OnItemClickListener( position ));
+	            	 holder.accountName.setText(mJabberAccounts.get(position).getAccountName());
 	             }
+	             
+	             vi.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(JabberAddAccountActivity.this, JabberAccountActivity.class);
+						intent.putExtra("position",position);
+			        	startActivity(intent);
+					}
+				});
+	             
 	             return vi;
 	         }
 	          
-	         @Override
-	         public void onClick(View v) {
-	                 Log.v("CustomAdapter", "=====Row button clicked=====");
-	         }
-	          
-	         /********* Called when Item click in ListView ************/
-	         private class OnItemClickListener  implements OnClickListener{           
-	             private int mPosition;
-	              
-	             OnItemClickListener(int position){
-	                  mPosition = position;
-	             }
-	              
-	             @Override
-	             public void onClick(View arg0) {
-	 
 	        
-	            /*   CustomListViewAndroidExample sct = (CustomListViewAndroidExample)activity;*/
-	 
-	              /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
-	 
-	                 //sct.onItemClick(mPosition);
-	             }               
-	         }   
 	     }
 	
 	 /********* Create a holder Class to contain inflated xml file elements *********/
@@ -157,5 +143,18 @@ public class JabberAddAccountActivity extends Activity
         public TextView accountName;
         public ToggleButton isConnected;
        
+    }
+    
+    @Override
+    protected void onResume() {
+      datasource.open();
+      mCustomAdapter.notifyDataSetChanged();
+      super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+      datasource.close();
+      super.onPause();
     }
 }

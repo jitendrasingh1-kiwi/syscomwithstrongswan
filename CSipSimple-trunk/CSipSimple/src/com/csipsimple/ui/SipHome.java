@@ -26,6 +26,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -58,6 +59,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.systemxcom.ui.chat.ChatDestructionActivity;
 import com.systemxcom.ui.chat.JabberAccountActivity;
 import com.systemxcom.ui.chat.JabberAddAccountActivity;
+import com.systemxcom.ui.chat.LockActivity;
 import com.systemxcom.ui.chat.OncamConversationFragment;
 import com.csipsimple.R;
 import com.csipsimple.api.SipConfigManager;
@@ -100,6 +102,7 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
     public static final int VPN_MENU = Menu.FIRST + 6;
     public static final int DESTROY_MESSAGE_MENU = Menu.FIRST + 7;
     public static final int XMPP_MESSAGING_MENU = Menu.FIRST + 8;
+    public static final int LOCK_SCREEN = Menu.FIRST + 9;
     
 
 
@@ -125,6 +128,9 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
     private Thread asyncSanityChecker;
     private Tab warningTab;
     private ObjectAnimator warningTabfadeAnim;
+    
+    public static final String LOCKPREFRENCES = "lockpreferences" ;
+	SharedPreferences sharedpreferences;
 
     /**
      * Listener interface for Fragments accommodated in {@link ViewPager}
@@ -145,7 +151,11 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
 
         setContentView(R.layout.sip_home);
         
-        startActivity(new Intent(getApplicationContext(), AutoLoginLauncherActivity.class));
+        sharedpreferences = getSharedPreferences(LOCKPREFRENCES, Context.MODE_PRIVATE);
+        if (sharedpreferences.contains("lock") && !sharedpreferences.getString("lock", "").equalsIgnoreCase(""))
+	     {
+        	startActivity(new Intent(getApplicationContext(), AutoLoginLauncherActivity.class));
+	     }
         //View v = LayoutInflater.from(this).inflate(R.layout.auto_login_layout,null);
 
         final ActionBar ab = getSupportActionBar();
@@ -797,9 +807,9 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
                 .setIcon(android.R.drawable.ic_menu_preferences)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add(Menu.NONE, HELP_MENU, Menu.NONE, R.string.help)
+        /*menu.add(Menu.NONE, HELP_MENU, Menu.NONE, R.string.help)
                 .setIcon(android.R.drawable.ic_menu_help)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);*/
         menu.add(Menu.NONE, CLOSE_MENU, Menu.NONE, R.string.menu_disconnect)
                 .setIcon(R.drawable.ic_lock_power_off)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -813,6 +823,9 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
         menu.add(Menu.NONE, XMPP_MESSAGING_MENU, Menu.NONE, R.string.menu_xmpp_messaging)
         .setIcon(R.drawable.strongswan)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(Menu.NONE, LOCK_SCREEN, Menu.NONE, R.string.lock_screen)
+        .setIcon(R.drawable.strongswan)
+        .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -820,6 +833,10 @@ public class SipHome extends SherlockFragmentActivity implements OnWarningChange
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case LOCK_SCREEN:
+            //startActivity(new Intent(this, JabberAccountActivity.class));
+            startActivity(new Intent(this, LockActivity.class));
+            return true;
         case XMPP_MESSAGING_MENU:
             //startActivity(new Intent(this, JabberAccountActivity.class));
             startActivity(new Intent(this, JabberAddAccountActivity.class));
